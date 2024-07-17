@@ -15,7 +15,7 @@ const Produto = ({ produto }) => {
     .then(response => response.json())
     .then(() => {
       setIsEditing(false);
-    
+      
     })
     .catch(error => {
       console.error('Erro ao atualizar produto:', error);

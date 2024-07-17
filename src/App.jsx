@@ -1,23 +1,22 @@
 import React, { useState } from 'react';
-import ProdutoLista from './components/ProdutoLista';
 import ProdutoForms from './components/ProdutoForms';
-
+import ProdutoLista from './components/ProdutoLista';
 
 const App = () => {
   const [isAdding, setIsAdding] = useState(false);
 
-  const handleAddProduct = (produto) => {
+  const handleAddProduct = (product) => {
     fetch('http://localhost:3000/produtos', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(produto),
+      body: JSON.stringify(product),
     })
     .then(response => response.json())
     .then(() => {
       setIsAdding(false);
-      // Refresh the product list or add the new product to the state
+     
     })
     .catch(error => {
       console.error('Erro ao adicionar produto:', error);
@@ -34,7 +33,7 @@ const App = () => {
         <button onClick={() => setIsAdding(true)}>Adicionar Produto</button>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
