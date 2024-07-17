@@ -1,46 +1,69 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const ProdutoForms = ({ produto, onSave, onCancel }) => {
-  const [nome, setNome] = useState(produto?.nome || '');
-  const [descricao, setDescricao] = useState(produto?.descricao || '');
-  const [preco, setPreco] = useState(produto?.preco || '');
-  const [dataDeCriacao, setDataDeCriacao] = useState(produto?.dataDeCriacao || '');
+const ProdutoForms = ({ product, onSave, onCancel }) => {
+  const [produto, setProduto] = useState({
+    nome: '',
+    descricao: '',
+    preco: '',
+    dataDeCriacao: '',
+  });
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    onSave({ id: produto?.id, nome, descricao, preco, dataDeCriacao })
-  }
+  useEffect(() => {
+    if (product) {
+      setProduto({
+        id: product.id || '',
+        nome: product.nome || '',
+        descricao: product.descricao || '',
+        preco: product.preco || '',
+        dataDeCriacao: product.dataDeCriacao || '',
+      });
+    }
+  }, [product]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setProduto((prevProduto) => ({ ...prevProduto, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSave(produto);
+  };
 
   return (
     <form onSubmit={handleSubmit}>
       <input
         type="text"
+        name="nome"
+        value={produto.nome}
+        onChange={handleChange}
         placeholder="Nome"
-        value={nome}
-        onChange={(e) => setNome(e.target.value)}
       />
       <input
         type="text"
+        name="descricao"
+        value={produto.descricao}
+        onChange={handleChange}
         placeholder="Descrição"
-        value={descricao}
-        onChange={(e) => setDescricao(e.target.value)}
       />
       <input
-        type="text"
+        type="number"
+        name="preco"
+        value={produto.preco}
+        onChange={handleChange}
         placeholder="Preço"
-        value={preco}
-        onChange={(e) => setPreco(e.target.value)}
       />
       <input
         type="date"
+        name="dataDeCriacao"
+        value={produto.dataDeCriacao}
+        onChange={handleChange}
         placeholder="Data de Criação"
-        value={dataDeCriacao}
-        onChange={(e) => setDataDeCriacao(e.target.value)}
       />
       <button type="submit">Salvar</button>
       <button type="button" onClick={onCancel}>Cancelar</button>
     </form>
-  )
+  );
 };
 
 export default ProdutoForms;

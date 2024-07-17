@@ -12,10 +12,15 @@ const Produto = ({ produto }) => {
       },
       body: JSON.stringify(atualizarProduto),
     })
-    .then(response => response.json())
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Erro ao atualizar produto');
+      }
+      return response.json();
+    })
     .then(() => {
       setIsEditing(false);
-      
+      window.location.reload(); 
     })
     .catch(error => {
       console.error('Erro ao atualizar produto:', error);
@@ -26,10 +31,14 @@ const Produto = ({ produto }) => {
     fetch(`http://localhost:3000/produtos/${produto.id}`, {
       method: 'DELETE',
     })
-    .then(() => {
-     
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Erro ao deletar produto');
+      }
+      return response.json();
     })
-    .catch(error => {
+    .then(() => {
+      window.location.reload(); 
       console.error('Erro ao deletar produto:', error);
     });
   };
@@ -53,7 +62,7 @@ const Produto = ({ produto }) => {
       <button onClick={() => setIsEditing(true)}>Editar</button>
       <button onClick={handleDelete}>Deletar</button>
     </div>
-  )
+  );
 };
 
-export default Produto
+export default Produto;
