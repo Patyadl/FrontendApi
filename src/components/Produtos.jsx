@@ -54,13 +54,15 @@ const Produto = ({ produto }) => {
   }
 
   return (
-    <div>
+    <div className="Produtos-content">
+      <div className="Produtos">
       <h2>{produto.nome}</h2>
       <p>{produto.descricao}</p>
       <p>{produto.preco}</p>
       <p>{produto.dataDeCriacao}</p>
       <button onClick={() => setIsEditing(true)}>Editar</button>
       <button onClick={handleDelete}>Deletar</button>
+    </div>
     </div>
   );
 };

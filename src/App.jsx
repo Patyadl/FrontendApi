@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import ProdutoForms from './components/ProdutoForms';
 import ProdutoLista from './components/ProdutoLista';
+import './App.css';
+
 
 const App = () => {
   const [isAdding, setIsAdding] = useState(false);
@@ -25,12 +27,16 @@ const App = () => {
 
   return (
     <div className="App">
+      <div className={"titulo"}>
       <h1>Lista de Produtos</h1>
+      </div>
       <ProdutoLista />
       {isAdding ? (
         <ProdutoForms onSave={handleAddProduct} onCancel={() => setIsAdding(false)} />
       ) : (
-        <button onClick={() => setIsAdding(true)}>Adicionar Produto</button>
+        <div className={"btAdd"}> 
+        <button id={"btAdd"} onClick={() => setIsAdding(true)}>Adicionar Produto</button>
+        </div>
       )}
     </div>
   );
