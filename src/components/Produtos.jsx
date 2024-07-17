@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import ProdutoForms from './ProdutoForms';
+import LoadingSpinner from './LoadingSpinner';
 
 const Produto = ({ produto }) => {
-  const [isEditing, setIsEditing] = useState(false);
-
+  const [isEditing, setIsEditing] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const handleSave = (atualizarProduto) => {
+    setIsLoading(true);
+
     fetch(`http://localhost:3000/produtos/${atualizarProduto.id}`, {
       method: 'PUT',
       headers: {
@@ -12,20 +15,24 @@ const Produto = ({ produto }) => {
       },
       body: JSON.stringify(atualizarProduto),
     })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Erro ao atualizar produto');
-      }
-      return response.json();
-    })
-    .then(() => {
-      setIsEditing(false);
-      window.location.reload(); 
-    })
-    .catch(error => {
-      console.error('Erro ao atualizar produto:', error);
-    });
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Erro ao atualizar produto')
+        }
+        return response.json()
+      })
+      .then(() => {
+        setIsEditing(false);
+        window.location.reload()
+      })
+      .catch(error => {
+        console.error('Erro ao atualizar produto:', error);
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   };
+
 
   const handleDelete = () => {
     fetch(`http://localhost:3000/produtos/${produto.id}`, {
@@ -33,13 +40,13 @@ const Produto = ({ produto }) => {
     })
     .then(response => {
       if (!response.ok) {
-        throw new Error('Erro ao deletar produto');
+        throw new Error('Erro ao deletar produto')
       }
       return response.json();
     })
     .then(() => {
       window.location.reload(); 
-      console.error('Erro ao deletar produto:', error);
+      console.error('Erro ao deletar produto:', error)
     });
   };
 
@@ -52,17 +59,25 @@ const Produto = ({ produto }) => {
       />
     );
   }
-
   return (
     <div className="Produtos-content">
-      <div className="Produtos">
-      <h2>{produto.nome}</h2>
-      <p>{produto.descricao}</p>
-      <p>{produto.preco}</p>
-      <p>{produto.dataDeCriacao}</p>
-      <button onClick={() => setIsEditing(true)}>Editar</button>
-      <button onClick={handleDelete}>Deletar</button>
-    </div>
+      {isLoading && <LoadingSpinner />} {/* Renderiza o spinner se isLoading for true */}
+      {isEditing ? (
+        <ProdutoForms
+          product={produto}
+          onSave={handleSave}
+          onCancel={() => setIsEditing(false)}
+        />
+      ) : (
+        <div className="Produtos">
+          <h2>{produto.nome}</h2>
+          <p>{produto.descricao}</p>
+          <p>{produto.preco}</p>
+          <p>{produto.dataDeCriacao}</p>
+          <button onClick={() => setIsEditing(true)}>Editar</button>
+          <button onClick={handleDelete}>Deletar</button>
+        </div>
+      )}
     </div>
   );
 };
