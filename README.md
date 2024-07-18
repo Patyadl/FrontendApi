@@ -1,8 +1,18 @@
 # React + Vite
+# Integração backend com Node.js e Express
+# Vercel para front e Render para back
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Esse arquivo explica o propósito do projeto e como rodar localmente.
 
-Currently, two official plugins are available:
+-Trata-se de uma aplicação que retorna uma lista de produtos previamente adicionados no banco. Além disso, dá as opções para o usuário: editar,salvar,adicionar um novo produtos e deletar;
+-Usa-se conceito de gerenciamento de estados e também gerenciando erros para uma melhor codificação, ou seja, mais proativa;
+-Também foi utilizada a biblioteca do React [react-loader-spinner](https://www.npmjs.com/package/react-loader-spinner), integrando assim  uma usabilidade ao usuário com mais facilidade.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Para rodar localmente,você pode:
+
+-Trocar as rotas para fetch('http://localhost:3000/produtos';
+-Ou simplesmente baixar o arquivo atual e digitar o comando de inicialização.
+
+#Comando de inicialização: npm rum dev
+
+. Confira também o backend por meio destee link do github: [(https://github.com/Patyadl/MinhaApiRestful)]
