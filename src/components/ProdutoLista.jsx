@@ -8,7 +8,7 @@ const ProdutoLista = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:3000/produtos')
+    fetch('https://minhaapirestful.onrender.com/produtos')
       .then(response => response.json())
       .then(data => {
         setProdutos(data);

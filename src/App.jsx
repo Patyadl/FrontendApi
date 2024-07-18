@@ -8,7 +8,7 @@ const App = () => {
   const [isAdding, setIsAdding] = useState(false);
 
   const handleAddProduct = (product) => {
-    fetch('http://localhost:3000/produtos', {
+    fetch('https://minhaapirestful.onrender.com/produtos', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

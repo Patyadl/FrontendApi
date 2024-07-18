@@ -8,7 +8,7 @@ const Produto = ({ produto }) => {
   const handleSave = (atualizarProduto) => {
     setIsLoading(true);
 
-    fetch(`http://localhost:3000/produtos/${atualizarProduto.id}`, {
+    fetch(`https://minhaapirestful.onrender.com/produtos/${atualizarProduto.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
