@@ -11,7 +11,8 @@ Esse arquivo explica o propósito do projeto e como rodar localmente.
 Para rodar localmente,você pode:
 
 -Trocar as rotas para fetch('http://localhost:3000/produtos';
--Ou simplesmente baixar o arquivo atual e digitar o comando de inicialização.
+-Ou simplesmente baixar o arquivo atual e digitar o comando de inicialização;
+-Baixe o node_modules : npm i ou npm install.
 
 #Comando de inicialização: npm rum dev
 
