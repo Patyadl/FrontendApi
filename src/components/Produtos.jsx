@@ -61,7 +61,7 @@ const Produto = ({ produto }) => {
   }
   return (
     <div className="Produtos-content">
-      {isLoading && <LoadingSpinner />} {/* Renderiza o spinner se isLoading for true */}
+      {isLoading && <LoadingSpinner />} 
       {isEditing ? (
         <ProdutoForms
           product={produto}
